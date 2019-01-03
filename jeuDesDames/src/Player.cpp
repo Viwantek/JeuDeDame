@@ -80,7 +80,7 @@ void Player::moveToken(Board* board, Case* token, int posX, int posY)
   std::cout << "Veut bouger en " << posX << ", " << posY << endl;
   try
   {
-    if (abs(posX - token->getPosX()) <= 1 && abs(posY - token->getPosY()) <= 1) // Only 1 case per move
+    if (posX - token->getPosX() <= 1 && posX - token->getPosX() >= 1 && posY - token->getPosY() <= 1 && posY - token->getPosY() >= 0) // Only 1 case per move
     {
       if (posX >= 0 && posX < board->getWidth() && posY >= 0 && posY < board->getWidth()) // Move inside bounds
       {
