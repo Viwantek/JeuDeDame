@@ -36,9 +36,11 @@
 		</Compiler>
 		<Unit filename="include/Board.h" />
 		<Unit filename="include/Case.h" />
+		<Unit filename="include/Player.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Board.cpp" />
 		<Unit filename="src/Case.cpp" />
+		<Unit filename="src/Player.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

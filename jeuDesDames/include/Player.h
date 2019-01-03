@@ -8,19 +8,19 @@ class Player
 {
   public:
     Player();
-    Player(std::string name, Board* board, char status);
+    Player(string name, Board* board, int status);
     virtual ~Player();
     void displayAllTokens();
-    std::string getName() const;
-    void moveToken(Board* board, Case* token, int posX, int posY);
+    string getName() const;
+    void moveToken(Board* board, Player* otherPlayer, Case* token, int posX, int posY);
     Case* getToken(int posX, int posY);
     int getNbToken() const;
-    void setNbToken(int nbTokens);
+    void removeNbToken(int nbTokensToRemove);
     void updateTokens(Case* token);
 
   protected:
-    std::string _name;
-    char _status;
+    string _name;
+    int _status; // 1, 2
     int _nbToken;
     Case _tokens[3];
 

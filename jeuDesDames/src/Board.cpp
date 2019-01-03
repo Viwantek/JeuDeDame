@@ -8,11 +8,11 @@ Board::Board(): _length(3), _width(3), _nbTokens(3)
     for (int j = 0; j < _width; j++)
     {
       if (i == 0)
-        _board[i][j] = Case(i, j, '1');
+        _board[i][j] = Case(i, j, 1);
       else if (i == _width-1)
-        _board[i][j] = Case(i, j, '2');
+        _board[i][j] = Case(i, j, 2);
       else
-        _board[i][j] = Case(i, j, '0');
+        _board[i][j] = Case(i, j, 0);
     }
   }
 }
@@ -24,27 +24,35 @@ Board::~Board()
 
 void Board::displayBoard()
 {
-  std::cout << std::endl << " ";
+  for (int i = 0; i < _width*3-1; i++)
+  {
+    if (i == 3 || i == 5 || i == 7)
+      cout << (i-2)/2;
+    else
+      cout << " ";
+  }
+  cout << endl << "  ";
   for (int i = 1; i < _width*3-1; i++)
   {
-    std::cout << "-";
+    cout << "-";
   }
-  std::cout << std::endl;
+  cout << endl;
+
   for (int i = 0; i < _length; i++)
   {
-    std::cout << "|";
+    cout << i << "|";
     for (int j = 0; j < _width; j++)
     {
-      std::cout << " " << (_board[i][j]).getStatus();
+      cout << " " << (_board[i][j]).getStatus();
     }
-    std::cout << " |" <<  std::endl;
+    cout << " |" <<  endl;
   }
-  std::cout << " ";
+  cout << "  ";
   for (int i = 1; i < _width*3-1; i++)
   {
-    std::cout << "-";
+    cout << "-";
   }
-  std::cout << std::endl << std::endl;
+  cout << endl << endl;
 }
 
 int Board::getWidth() const
@@ -59,6 +67,6 @@ Case& Board::getCase(int i, int j)
 
 void Board::updateTokens(Case* token, int prevX, int prevY)
 {
-  _board[prevX][prevY] = Case(prevX, prevY, '0');
+  _board[prevX][prevY].clearToken();
   _board[token->getPosX()][token->getPosY()].setStatus(token->getStatus());
 }

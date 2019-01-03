@@ -10,7 +10,7 @@ class Board
   public:
     Board();
     Board(int width, int length);
-    Board(int width, int length, int nbTokens);
+    Board(int width, int length, int nbTokens, string playOneName, string playTwoName);
     virtual ~Board();
     void displayBoard();
     int getWidth() const;

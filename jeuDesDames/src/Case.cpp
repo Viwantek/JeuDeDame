@@ -1,16 +1,13 @@
 #include "Case.h"
 
-Case::Case(): _posX(0), _posY(0), _status('0')
+Case::Case(): _posX(0), _posY(0), _status(0)
 {
 
 }
 
-Case::Case(int posX, int posY, char status): _posX(posX), _posY(posY), _status(status)
+Case::Case(int posX, int posY, int status): _posX(posX), _posY(posY), _status(status)
 {
-//  _top = new Case(0,0,'0');
-//  _bottom(0,0,'0');
-//  _right(0,0,'0');
-//  _left(0,0,'0');
+
 }
 
 Case::~Case()
@@ -36,12 +33,12 @@ const Case& Case::operator=(const Case& other)
   return *this;
 }
 
-char Case::getStatus() const
+int Case::getStatus() const
 {
   if (this)
     return _status;
   else
-    return 'X';
+    return 0;
 }
 
 int Case::getPosX() const
@@ -66,7 +63,12 @@ void Case::setPos(int posX, int posY)
   _posY = posY;
 }
 
-void Case::setStatus(char status)
+void Case::setStatus(int status)
 {
   _status = status;
+}
+
+void Case::clearToken()
+{
+  _status = 0;
 }

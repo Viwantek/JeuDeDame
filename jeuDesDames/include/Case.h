@@ -12,23 +12,24 @@ class Case
 {
   public:
     Case();
-    Case(int posX, int posY, char status);
+    Case(int posX, int posY, int status);
     virtual ~Case();
     const Case& operator=(const Case& other);
-    char getStatus() const;
+    int getStatus() const;
     int getPosX() const;
     int getPosY() const;
     void setPos(int posX, int posY);
-    void setStatus(char status);
+    void setStatus(int status);
+    void clearToken();
 
   protected:
     int _posX;
     int _posY;
-//    Case& _top;
-//    Case& _bottom;
-//    Case& _left;
-//    Case& _right;
-    char _status;
+//    Case* _top;
+//    Case* _bottom;
+//    Case* _left;
+//    Case* _right;
+    int _status;
 
   private:
 };
