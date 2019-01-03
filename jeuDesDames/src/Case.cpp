@@ -38,15 +38,35 @@ const Case& Case::operator=(const Case& other)
 
 char Case::getStatus() const
 {
-  return _status;
+  if (this)
+    return _status;
+  else
+    return 'X';
 }
 
 int Case::getPosX() const
 {
-  return _posX;
+  if (this)
+    return _posX;
+  else
+    return -1;
 }
 
 int Case::getPosY() const
 {
-  return _posY;
+  if (this)
+    return _posY;
+  else
+    return -1;
+}
+
+void Case::setPos(int posX, int posY)
+{
+  _posX = posX;
+  _posY = posY;
+}
+
+void Case::setStatus(char status)
+{
+  _status = status;
 }

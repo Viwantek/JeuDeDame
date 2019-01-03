@@ -35,7 +35,7 @@ void Board::displayBoard()
     std::cout << "|";
     for (int j = 0; j < _width; j++)
     {
-      std::cout << " " << _board[i][j].getStatus();
+      std::cout << " " << (_board[i][j]).getStatus();
     }
     std::cout << " |" <<  std::endl;
   }
@@ -57,7 +57,8 @@ Case& Board::getCase(int i, int j)
   return this->_board[i][j];
 }
 
-void updateTokens()
+void Board::updateTokens(Case* token, int prevX, int prevY)
 {
-
+  _board[prevX][prevY] = Case(prevX, prevY, '0');
+  _board[token->getPosX()][token->getPosY()].setStatus(token->getStatus());
 }

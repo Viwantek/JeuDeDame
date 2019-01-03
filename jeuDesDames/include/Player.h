@@ -12,10 +12,11 @@ class Player
     virtual ~Player();
     void displayAllTokens();
     std::string getName() const;
-    void moveToken(Case* token, int posX, int posY);
+    void moveToken(Board* board, Case* token, int posX, int posY);
     Case* getToken(int posX, int posY);
     int getNbToken() const;
     void setNbToken(int nbTokens);
+    void updateTokens(Case* token);
 
   protected:
     std::string _name;

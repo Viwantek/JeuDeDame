@@ -13,11 +13,11 @@ int main()
     PlateauDeJeu->displayBoard();
     Player* playerOne = new Player("Joueur 1", PlateauDeJeu, '1');
     Player* playerTwo = new Player("Joueur 2", PlateauDeJeu, '2');
-    playerOne->displayAllTokens();
+//    playerOne->displayAllTokens();
 //    playerTwo->displayAllTokens();
-    Case* test = playerOne->getToken(0,2); // Régler le cas où le jeton n'y est pas !
-    std::cout << test->getPosX() << " " << test->getPosY() << std::endl;
-
+    playerOne->moveToken(PlateauDeJeu, playerOne->getToken(0,1), 1, 1);
+//    playerOne->displayAllTokens();
+    PlateauDeJeu->displayBoard();
 
     return 0;
 }

@@ -2,6 +2,9 @@
 #define CASE_H
 
 #include <string>
+#include <iostream>
+#include <vector>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -15,6 +18,8 @@ class Case
     char getStatus() const;
     int getPosX() const;
     int getPosY() const;
+    void setPos(int posX, int posY);
+    void setStatus(char status);
 
   protected:
     int _posX;

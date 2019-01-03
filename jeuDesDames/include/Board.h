@@ -1,8 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include <iostream>
-#include <vector>
 #include "Case.h"
 
 #define TAILLE_PLATEAU 3
@@ -17,7 +15,7 @@ class Board
     void displayBoard();
     int getWidth() const;
     Case& getCase(int i, int j);
-    void updateTokens();
+    void updateTokens(Case* token, int prevX, int prevY);
 
   protected:
     int _length;

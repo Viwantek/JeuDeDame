@@ -29,7 +29,7 @@ Player::~Player()
 
 void Player::displayAllTokens()
 {
-  std::cout << "Position of " << this->getName() << "'s tokens :" << std::endl;
+  std::cout << "Position of '" << this->getName() << "''s tokens :" << std::endl;
   for (int i = 0; i < _nbToken; i++)
   {
     std::cout << "X : " << _tokens[i].getPosX() <<  ", Y : " << _tokens[i].getPosY() << std::endl;
@@ -54,16 +54,45 @@ void Player::setNbToken(int nbTokens)
 
 Case* Player::getToken(int posX, int posY)
 {
-  for (int i = 0; i < getNbToken(); i++)
+  try
   {
-    if (_tokens[i].getPosX() == posX && _tokens[i].getPosY() == posY)
-      return &_tokens[i];
+    for (int i = 0; i < getNbToken(); i++)
+    {
+      if (_tokens[i].getPosX() == posX && _tokens[i].getPosY() == posY)
+      {
+        return &_tokens[i];
+      }
+    }
+    throw string("Le joueur '" + this->getName() + "' n'a pas de pion a cette position");
+  }
+  catch (string const& e)
+  {
+    cerr << endl << e << endl << endl;
   }
   return 0;
 }
 
-void Player::moveToken(Case* token, int posX, int posY)
+void Player::moveToken(Board* board, Case* token, int posX, int posY)
 {
-  std::cout << "X : " << token->getPosX() << ", Y : " << token->getPosY() << endl;
+  int tokenPosX = (token && posX >= 0 && posY >= 0) ? token->getPosX() : posX;
+  int tokenPosY = (token && posX >= 0 && posY >= 0) ? token->getPosY() : posY;
+  std::cout << "X : " << tokenPosX << ", Y : " << tokenPosY << endl;
   std::cout << "Veut bouger en " << posX << ", " << posY << endl;
+  try
+  {
+    if (abs(posX - token->getPosX()) <= 1 && abs(posY - token->getPosY()) <= 1) // Only 1 case per move
+    {
+      if (posX >= 0 && posX < board->getWidth() && posY >= 0 && posY < board->getWidth()) // Move inside bounds
+      {
+        token->setPos(posX, posY);
+        board->updateTokens(token, tokenPosX, tokenPosY);
+      } else
+        throw string("Position impossible a atteindre pour le pion !");
+    } else
+        throw string("Position impossible a atteindre pour le pion !");
+  }
+  catch (string const& e)
+  {
+    cerr << endl << e << endl << endl;
+  }
 }
