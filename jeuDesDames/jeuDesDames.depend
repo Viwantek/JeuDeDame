@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1546515119 source:c:\travail\programmation\jeudesdames\main.cpp
+	"Board.h"
+	"Player.h"
+
+1546514033 source:c:\travail\programmation\jeudesdames\src\case.cpp
+	"Case.h"
+
+1546512700 c:\travail\programmation\jeudesdames\include\case.h
+	<string>
+
+1546514275 source:c:\travail\programmation\jeudesdames\src\board.cpp
+	"Board.h"
+	"Case.h"
+
+1546514241 c:\travail\programmation\jeudesdames\include\board.h
+	<iostream>
+	<vector>
+	"Case.h"
+
+1546514890 source:c:\travail\programmation\jeudesdames\src\player.cpp
+	"Player.h"
+
+1546514672 c:\travail\programmation\jeudesdames\include\player.h
+	"Board.h"
+	"Case.h"
+
