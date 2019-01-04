@@ -12,7 +12,7 @@ class Player
     virtual ~Player();
     void displayAllTokens();
     string getName() const;
-    void moveToken(Board* board, Player* otherPlayer, Case* token, int posX, int posY, bool first);
+    void moveToken(Board* board, Player* otherPlayer, Case* token, int posX, int posY, int playChoice);
     Case* getToken(int posX, int posY);
     int getNbToken() const;
     void removeNbToken(int nbTokensToRemove);
@@ -27,5 +27,8 @@ class Player
 
   private:
 };
+
+void initGame(Board*, Player*, Player*, int&, string&, string&);
+void loopGame(Board*, Player*, Player*, int&, string&, string&);
 
 #endif // PLAYER_H

@@ -75,7 +75,7 @@ Case* Player::getToken(int posX, int posY)
   return 0;
 }
 
-void Player::moveToken(Board* board, Player* otherPlayer, Case* token, int posX, int posY, bool first)
+void Player::moveToken(Board* board, Player* otherPlayer, Case* token, int posX, int posY, int playChoice)
 {
   int tokenPosX, tokenPosY;
   if (posX == -1 || posY == -1)
@@ -87,9 +87,7 @@ void Player::moveToken(Board* board, Player* otherPlayer, Case* token, int posX,
     token = &_tokens[tokenChosen];
     tokenPosX = token->getPosX();
     tokenPosY = token->getPosY();
-//    cerr << "Le token choisi est a la position : " << tokenChosen << endl;
-//    cerr << "Sa position : (" << token->getPosX() << "," << token->getPosY() << ")" << endl;
-    if (!first)
+    if (playChoice == 1)
       caseChosenX *= -1;
     posX = token->getPosX() + caseChosenX;
     // No out of bound of the board

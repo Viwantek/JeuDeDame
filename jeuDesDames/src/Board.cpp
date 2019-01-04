@@ -22,39 +22,6 @@ Board::~Board()
 
 }
 
-void Board::displayBoard()
-{
-  for (int i = 0; i < _width*3-1; i++)
-  {
-    if (i == 3 || i == 5 || i == 7)
-      cout << (i-2)/2;
-    else
-      cout << " ";
-  }
-  cout << endl << "  ";
-  for (int i = 1; i < _width*3-1; i++)
-  {
-    cout << "-";
-  }
-  cout << endl;
-
-  for (int i = 0; i < _length; i++)
-  {
-    cout << i << "|";
-    for (int j = 0; j < _width; j++)
-    {
-      cout << " " << (_board[i][j]).getStatus();
-    }
-    cout << " |" <<  endl;
-  }
-  cout << "  ";
-  for (int i = 1; i < _width*3-1; i++)
-  {
-    cout << "-";
-  }
-  cout << endl << endl;
-}
-
 int Board::getWidth() const
 {
   return _width;
@@ -69,4 +36,43 @@ void Board::updateTokens(Case* token, int prevX, int prevY)
 {
   _board[prevX][prevY].clearToken();
   _board[token->getPosX()][token->getPosY()].setStatus(token->getStatus());
+}
+
+ostream &operator<<(ostream &flux, Board const* board)
+{
+    board->displayBoard(flux) ;
+    return flux;
+}
+
+void Board::displayBoard(ostream &flux) const
+{
+  for (int i = 0; i < _width*3-1; i++)
+  {
+    if (i == 3 || i == 5 || i == 7)
+      flux << (i-2)/2;
+    else
+      flux << " ";
+  }
+  flux << endl << "  ";
+  for (int i = 1; i < _width*3-1; i++)
+  {
+    flux << "-";
+  }
+  flux << endl;
+
+  for (int i = 0; i < _length; i++)
+  {
+    flux << i << "|";
+    for (int j = 0; j < _width; j++)
+    {
+      flux << " " << (_board[i][j]).getStatus();
+    }
+    flux << " |" <<  endl;
+  }
+  flux << "  ";
+  for (int i = 1; i < _width*3-1; i++)
+  {
+    flux << "-";
+  }
+  flux << endl << endl;
 }

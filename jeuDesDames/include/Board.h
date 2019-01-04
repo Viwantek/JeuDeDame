@@ -12,7 +12,7 @@ class Board
     Board(int width, int length);
     Board(int width, int length, int nbTokens, string playOneName, string playTwoName);
     virtual ~Board();
-    void displayBoard();
+    void displayBoard(ostream &flux) const;
     int getWidth() const;
     Case& getCase(int i, int j);
     void updateTokens(Case* token, int prevX, int prevY);
@@ -25,5 +25,7 @@ class Board
 
   private:
 };
+
+ostream &operator<<(ostream &flux, Board const* board);
 
 #endif // BOARD_H
