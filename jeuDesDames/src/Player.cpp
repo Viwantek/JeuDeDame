@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-  //ctor
+
 }
 
 Player::Player(string name, Board* board, int status): _name(name), _status(status)
@@ -24,7 +24,7 @@ Player::Player(string name, Board* board, int status): _name(name), _status(stat
 
 Player::~Player()
 {
-  delete this;
+
 }
 
 void Player::displayAllTokens()
@@ -65,7 +65,8 @@ Case* Player::getToken(int posX, int posY)
         return &_tokens[i];
       }
     }
-    throw string("Le joueur '" + this->getName() + "' n'a pas de pion a cette position");
+    if (posX != -1 && posY != -1)
+      throw string("Le joueur '" + this->getName() + "' n'a pas de pion a cette position");
   }
   catch (string const& e)
   {
@@ -74,10 +75,38 @@ Case* Player::getToken(int posX, int posY)
   return 0;
 }
 
-void Player::moveToken(Board* board, Player* otherPlayer, Case* token, int posX, int posY)
+void Player::moveToken(Board* board, Player* otherPlayer, Case* token, int posX, int posY, bool first)
 {
-  int tokenPosX = (token && posX >= 0 && posY >= 0) ? token->getPosX() : posX;
-  int tokenPosY = (token && posX >= 0 && posY >= 0) ? token->getPosY() : posY;
+  int tokenPosX, tokenPosY;
+  if (posX == -1 || posY == -1)
+  {
+    srand (time(NULL));
+    int tokenChosen = rand() % 3; // TO DO (3 à changer)
+    int caseChosenX = rand() % 2;
+    int caseChosenY = rand() % 3 + (-1);
+    token = &_tokens[tokenChosen];
+    tokenPosX = token->getPosX();
+    tokenPosY = token->getPosY();
+//    cerr << "Le token choisi est a la position : " << tokenChosen << endl;
+//    cerr << "Sa position : (" << token->getPosX() << "," << token->getPosY() << ")" << endl;
+    if (!first)
+      caseChosenX *= -1;
+    posX = token->getPosX() + caseChosenX;
+    // No out of bound of the board
+    posY = token->getPosY() + caseChosenY;
+    if (posX >= board->getWidth())
+      posX = board->getWidth() - 1;
+    else if (posX < 0)
+      posX = 0;
+    if (posY >= board->getWidth())
+      posY = board->getWidth() - 1;
+    else if (posY < 0)
+      posY = 0;
+  } else
+  {
+    tokenPosX = (token && posX >= 0 && posY >= 0) ? token->getPosX() : posX;
+    tokenPosY = (token && posX >= 0 && posY >= 0) ? token->getPosY() : posY;
+  }
   cout << "(" << tokenPosX << "," << tokenPosY << ") ";
   cout << "veut bouger en (" << posX << "," << posY << ")" << endl << endl;
   try
@@ -107,4 +136,20 @@ void Player::moveToken(Board* board, Player* otherPlayer, Case* token, int posX,
   {
     cerr << endl << e << endl << endl;
   }
+}
+
+const Player& Player::operator=(const Player& other)
+{
+  if (this != &other)
+  {
+    _name = other._name;
+    _status = other._status;
+    _nbToken = other._nbToken;
+    for (int i = 0; i < 3; i++) // TO DO (3 to change)
+    {
+      _tokens[i] = other._tokens[i];
+    }
+
+  }
+  return *this;
 }

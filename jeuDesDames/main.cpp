@@ -5,6 +5,7 @@ using namespace std;
 
 // IA hasard
 // Amélioration de l'IA
+// Case _tokens du Player à transformer en vector pour éviter de choisir un token qui n'existe pas
 // Améliorer le code pour prendre en compte un plateau plus grand, plus de pions, etc.
 // Enlever fonction "displayBoard" > surcharger l'opérateur << à la place
 
@@ -27,15 +28,16 @@ int main()
     else
       computer = new Player(ennemyName, plateauDeJeu, 1);
     Player* player = new Player(playerName, plateauDeJeu, playChoice);
-
+    Player* playerWhoPlays, *playerWhoDont;
     cout << endl << endl << endl;
 
     /* COMMENCEMENT DU JEU */
 
-    int nbTours = 3;
-    int tokenPosX = 0, tokenPosY = 0;
+    int nbTours = 1;
+    int tokenPosX, tokenPosY, posToMoveX, posToMoveY;
     while (nbTours && player->getNbToken() & computer->getNbToken())
     {
+      tokenPosX = -1, tokenPosY = -1, posToMoveX = -1, posToMoveY = -1;
       cout << "------------------Plateau de jeu------------------" << endl << endl;
       plateauDeJeu->displayBoard();
 
@@ -48,11 +50,21 @@ int main()
       cout << " de jouer..." << endl;
       if (first)
       {
+        playerWhoPlays = player;
+        playerWhoDont = computer;
         cout << "Choisissez un pion a deplacer : (x y) ";
         cin >> tokenPosX >> tokenPosY;
+        cout << "Choisissez une case sur laquelle vous souhaitez deplacer ce pion : (x y) ";
+        cin >> posToMoveX >> posToMoveY;
+      } else
+      {
+          playerWhoPlays = computer;
+          playerWhoDont = player;
       }
+      playerWhoPlays->moveToken(plateauDeJeu, playerWhoDont, playerWhoPlays->getToken(tokenPosX, tokenPosY), posToMoveX, posToMoveY, first);
+      plateauDeJeu->displayBoard();
 
-      //Déplacement
+      tokenPosX = -1, tokenPosY = -1, posToMoveX = -1, posToMoveY = -1;
 
       /* JOUEUR 2 */
       cout << "C'est a ";
@@ -63,19 +75,27 @@ int main()
       cout << " de jouer..." << endl;
       if (!first)
       {
+        playerWhoPlays = player;
+        playerWhoDont = computer;
         cout << "Choisissez un pion a deplacer : (x y) ";
         cin >> tokenPosX >> tokenPosY;
+        cout << "Choisissez une case sur laquelle vous souhaitez deplacer ce pion : (x y) ";
+        cin >> posToMoveX >> posToMoveY;
+      } else
+      {
+          playerWhoPlays = computer;
+          playerWhoDont = player;
       }
+      playerWhoPlays->moveToken(plateauDeJeu, playerWhoDont, playerWhoPlays->getToken(tokenPosX, tokenPosY), posToMoveX, posToMoveY, first);
+      plateauDeJeu->displayBoard();
+
       nbTours--;
     }
 
-//    player->moveToken(PlateauDeJeu, computer, computer->getToken(0,0), 1, 1);
-//    PlateauDeJeu->displayBoard();
-//    cout << "Nb pions : " << player->getNbToken() << endl;
-//    cout << "Nb pions : " << computer->getNbToken() << endl;
-//    player->moveToken(PlateauDeJeu, computer, player->getToken(2,1), 2, 1);
-//    PlateauDeJeu->displayBoard();
-
+    // Destructors
+    delete plateauDeJeu;
+    delete player;
+    delete computer;
 
     return 0;
 }

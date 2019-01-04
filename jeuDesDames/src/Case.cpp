@@ -17,18 +17,11 @@ Case::~Case()
 
 const Case& Case::operator=(const Case& other)
 {
-  if (this == &other)
-  {
-
-  } else
+  if (this != &other)
   {
     _posX = other._posX;
     _posY = other._posY;
     _status = other._status;
-//    _top = other._top;
-//    _left = other._left;
-//    _right = other._right;
-//    _bottom = other._bottom;
   }
   return *this;
 }

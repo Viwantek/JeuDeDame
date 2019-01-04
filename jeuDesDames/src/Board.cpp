@@ -19,7 +19,7 @@ Board::Board(): _length(3), _width(3), _nbTokens(3)
 
 Board::~Board()
 {
-  delete this;
+
 }
 
 void Board::displayBoard()

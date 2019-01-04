@@ -12,11 +12,12 @@ class Player
     virtual ~Player();
     void displayAllTokens();
     string getName() const;
-    void moveToken(Board* board, Player* otherPlayer, Case* token, int posX, int posY);
+    void moveToken(Board* board, Player* otherPlayer, Case* token, int posX, int posY, bool first);
     Case* getToken(int posX, int posY);
     int getNbToken() const;
     void removeNbToken(int nbTokensToRemove);
     void updateTokens(Case* token);
+    const Player& operator=(const Player& other);
 
   protected:
     string _name;
